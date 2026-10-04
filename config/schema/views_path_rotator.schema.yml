@@ -1,0 +1,34 @@
+views_path_rotator.target.*:
+  type: config_entity
+  label: 'Views Path Rotator rotation target'
+  mapping:
+    id:
+      type: string
+      label: 'Target machine name'
+    label:
+      type: label
+      label: 'Label'
+    status:
+      type: boolean
+      label: 'Automatic rotation enabled'
+    view_id:
+      type: string
+      label: 'View machine name'
+    display_id:
+      type: string
+      label: 'Page display machine name'
+    path_prefix:
+      type: string
+      label: 'Fixed path prefix (no slashes, may be empty)'
+    token_length:
+      type: integer
+      label: 'Length of the random token in the path'
+    interval_count:
+      type: integer
+      label: 'Number of rotation interval units'
+    interval_unit:
+      type: string
+      label: 'Interval unit (minutes|hours|days)'
+    trigger_on_request:
+      type: boolean
+      label: 'Also check on regular site requests (not only on hook_cron)'

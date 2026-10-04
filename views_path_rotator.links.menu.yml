@@ -1,0 +1,6 @@
+views_path_rotator.settings:
+  title: 'Views Path Rotator'
+  description: 'Timed path rotation for View page displays: list of targets.'
+  parent: system.admin_config_search
+  route_name: entity.views_path_rotator_target.collection
+  weight: 15

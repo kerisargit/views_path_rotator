@@ -1,0 +1,17 @@
+---
+label: 'Linking to a rotating page'
+related:
+  - views_path_rotator.overview
+---
+<p>{% trans %}The path of a rotating page changes, but its route name (<em>view.VIEW_ID.DISPLAY_ID</em>) does not. Anything that should lead to the page must refer to it by route name, not by a literal path. The exact route name is shown on the target edit form after you choose the View and display.{% endtrans %}</p>
+<h2>{% trans %}Menu links{% endtrans %}</h2>
+<p>{% trans %}In the <em>Link</em> field, enter <code>route:view.VIEW_ID.DISPLAY_ID</code> instead of a literal path. It resolves to the current path on every render. A literal path returns 404 after the first rotation.{% endtrans %}</p>
+<h2>{% trans %}Block and asset visibility{% endtrans %}</h2>
+<p>{% trans %}The standard <em>Pages</em> (Request Path) condition with the nominal path keeps working after rotation: it compares against the internal current path, not the raw URL. Alternatively, use the <em>Views Path Rotator: current rotating page</em> condition, which names the target by its machine name.{% endtrans %}</p>
+<h2>{% trans %}Free text{% endtrans %}</h2>
+<p>{% trans %}Where you need the address itself as text (custom block body, content), use the tokens <code>[views_path_rotator:target_path:TARGET_ID]</code> (path) and <code>[views_path_rotator:target_url:TARGET_ID]</code> (absolute URL). TARGET_ID is the machine name of the target from the target list.{% endtrans %}</p>
+<h2>{% trans %}Third-party code{% endtrans %}</h2>
+<ul>
+  <li>{% trans %}Safe: anything that asks Drupal by route, such as links built with <em>Url::fromRoute()</em> or <em>route:</em> URIs, the <em>path.current</em> service and the current route match. Facets links keep working too.{% endtrans %}</li>
+  <li>{% trans %}Breaks on the next rotation: anything that matches the raw address string, such as client-side JavaScript comparing <em>window.location.pathname</em>, direct reads of the request path, <em>internal:/path</em> URIs and literal paths in config or external services.{% endtrans %}</li>
+</ul>

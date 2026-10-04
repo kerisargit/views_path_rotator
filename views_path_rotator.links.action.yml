@@ -1,0 +1,5 @@
+entity.views_path_rotator_target.add_form:
+  route_name: entity.views_path_rotator_target.add_form
+  title: 'Add rotation target'
+  appears_on:
+    - entity.views_path_rotator_target.collection

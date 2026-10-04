@@ -1,0 +1,162 @@
+<?php
+
+/**
+ * @file
+ * Install, update and requirements hooks for Views Path Rotator.
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_requirements().
+ */
+function views_path_rotator_requirements($phase) {
+  $requirements = [];
+  if ($phase !== 'runtime') {
+    return $requirements;
+  }
+
+  $targets = \Drupal::entityTypeManager()->getStorage('views_path_rotator_target')->loadByProperties(['status' => TRUE]);
+  if (!$targets) {
+    return $requirements;
+  }
+
+  // A reverse proxy or CDN in front of Drupal cannot be detected from here,
+  // and it keeps serving an old rotated path until its own TTL expires.
+  $requirements['views_path_rotator_external_cache'] = \Drupal::moduleHandler()->moduleExists('purge')
+    ? [
+      'title' => t('Views Path Rotator — external caches'),
+      'value' => t('Purge is installed: make sure its queue processes cache-tag invalidations, so proxies drop old rotated paths.'),
+      'severity' => REQUIREMENT_INFO,
+    ]
+    : [
+      'title' => t('Views Path Rotator — external caches'),
+      'value' => t('Rotation only clears Drupal\'s own caches.'),
+      'description' => t('If a reverse proxy or CDN (Varnish, nginx cache, Cloudflare…) caches pages in front of this site, it keeps serving an old rotated path until its own TTL expires. Purge it on rotation (for example with the Purge module) or keep its TTL for these pages short.'),
+      'severity' => REQUIREMENT_INFO,
+    ];
+
+  $settings_url = Url::fromRoute('entity.views_path_rotator_target.collection')->toString();
+  $broken = [];
+
+  foreach ($targets as $target) {
+    /** @var \Drupal\views_path_rotator\Entity\ViewsPathRotatorTargetInterface $target */
+    $view_id = $target->getViewId();
+    $display_id = $target->getDisplayId();
+    $view = $view_id !== '' ? \Drupal::entityTypeManager()->getStorage('view')->load($view_id) : NULL;
+    $display_path = $view ? ($view->get('display')[$display_id]['display_options']['path'] ?? NULL) : NULL;
+
+    if ($view_id === '' || $display_id === '' || !$view || $display_path === NULL) {
+      $broken[] = $target->label();
+    }
+  }
+
+  if ($broken) {
+    $requirements['views_path_rotator_target'] = [
+      'title' => t('Views Path Rotator'),
+      'value' => t('Rotation is enabled, but the View/display was not found for @count of @total targets: @labels', [
+        '@count' => count($broken),
+        '@total' => count($targets),
+        '@labels' => implode(', ', $broken),
+      ]),
+      'description' => t('These targets are not rotated until their View/display is set again; see the <a href=":url">target list</a>.', [':url' => $settings_url]),
+      'severity' => REQUIREMENT_WARNING,
+    ];
+    return $requirements;
+  }
+
+  $requirements['views_path_rotator_target'] = [
+    'title' => t('Views Path Rotator'),
+    'value' => \Drupal::translation()->formatPlural(count($targets), 'Rotation configured: 1 enabled target.', 'Rotation configured: @count enabled targets.'),
+    'severity' => REQUIREMENT_INFO,
+  ];
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function views_path_rotator_uninstall() {
+  $keys = [
+    'views_path_rotator.current_path',
+    'views_path_rotator.previous_path',
+    'views_path_rotator.last_rotation',
+  ];
+
+  // Best effort: a failure here must never block uninstalling the module.
+  try {
+    foreach (\Drupal::entityTypeManager()->getStorage('views_path_rotator_target')->loadMultiple() as $target) {
+      foreach (['current_path', 'previous_path', 'last_rotation'] as $suffix) {
+        $keys[] = 'views_path_rotator.' . $suffix . '.' . $target->id();
+      }
+    }
+  }
+  catch (\Throwable) {
+  }
+
+  \Drupal::state()->deleteMultiple($keys);
+  Cache::invalidateTags(['route_match']);
+}
+
+/**
+ * Moves the single-target views_path_rotator.settings config into a rotation target entity.
+ */
+function views_path_rotator_update_10001() {
+  $config_factory = \Drupal::configFactory();
+  $legacy = $config_factory->getEditable('views_path_rotator.settings');
+  if ($legacy->isNew()) {
+    return t('No legacy views_path_rotator.settings config, nothing to migrate.');
+  }
+
+  $view_id = (string) $legacy->get('view_id');
+  $display_id = (string) $legacy->get('display_id');
+  if ($view_id === '' || $display_id === '') {
+    $legacy->delete();
+    return t('The legacy views_path_rotator.settings config was empty (no View/display selected); deleted without creating a target.');
+  }
+
+  $target_id = preg_replace('/[^a-z0-9_]/', '_', strtolower($view_id . '_' . $display_id));
+
+  $storage = \Drupal::entityTypeManager()->getStorage('views_path_rotator_target');
+  if (!$storage->load($target_id)) {
+    $storage->create([
+      'id' => $target_id,
+      'label' => $view_id . ' : ' . $display_id,
+      'status' => (bool) $legacy->get('enabled'),
+      'view_id' => $view_id,
+      'display_id' => $display_id,
+      'path_prefix' => (string) $legacy->get('path_prefix'),
+      'token_length' => (int) ($legacy->get('token_length') ?: 16),
+      'interval_count' => (int) ($legacy->get('interval_count') ?? 30),
+      'interval_unit' => (string) ($legacy->get('interval_unit') ?: 'minutes'),
+      'trigger_on_request' => (bool) $legacy->get('trigger_on_request'),
+    ])->save();
+
+    $state = \Drupal::state();
+    $old_values = $state->getMultiple([
+      'views_path_rotator.current_path',
+      'views_path_rotator.previous_path',
+      'views_path_rotator.last_rotation',
+    ]);
+    $new_values = [];
+    foreach ($old_values as $key => $value) {
+      if ($value !== NULL) {
+        $new_values[$key . '.' . $target_id] = $value;
+      }
+    }
+    if ($new_values) {
+      $state->setMultiple($new_values);
+    }
+    $state->deleteMultiple([
+      'views_path_rotator.current_path',
+      'views_path_rotator.previous_path',
+      'views_path_rotator.last_rotation',
+    ]);
+  }
+
+  $legacy->delete();
+
+  return t('Legacy views_path_rotator.settings config migrated to rotation target "@id".', ['@id' => $target_id]);
+}

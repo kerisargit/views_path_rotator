@@ -1,0 +1,35 @@
+services:
+  views_path_rotator.manager:
+    class: Drupal\views_path_rotator\Service\PathRotatorManager
+    arguments:
+      - '@config.factory'
+      - '@state'
+      - '@lock'
+      - '@entity_type.manager'
+      - '@router.route_provider'
+      - '@logger.factory'
+      - '@datetime.time'
+  views_path_rotator.path_processor:
+    class: Drupal\views_path_rotator\PathProcessor\RotatedPathProcessor
+    arguments:
+      - '@entity_type.manager'
+      # Not @router.route_provider: it depends on path_processor_manager, which
+      # collects this service, so a direct reference is a circular dependency.
+      - '@service_container'
+      - '@state'
+    tags:
+      - { name: path_processor_inbound, priority: 100 }
+      - { name: path_processor_outbound, priority: 300 }
+  views_path_rotator.nominal_path_access_subscriber:
+    class: Drupal\views_path_rotator\EventSubscriber\NominalPathAccessSubscriber
+    arguments:
+      - '@entity_type.manager'
+      - '@state'
+    tags:
+      - { name: event_subscriber }
+  views_path_rotator.rotation_task:
+    class: Drupal\views_path_rotator\IntervalTask\RotationTask
+    arguments:
+      - '@views_path_rotator.manager'
+    tags:
+      - { name: interval_trigger.task }

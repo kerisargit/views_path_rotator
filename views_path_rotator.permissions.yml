@@ -1,0 +1,4 @@
+administer views path rotator:
+  title: 'Administer Views Path Rotator'
+  description: 'Configure path rotation (which View/display to rotate, interval) and run rotation manually.'
+  restrict access: true

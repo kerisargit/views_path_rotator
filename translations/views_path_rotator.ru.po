@@ -1,0 +1,403 @@
+# Russian translation of views_path_rotator.
+msgid ""
+msgstr ""
+"Project-Id-Version: views_path_rotator\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) ? 1 : 2));\n"
+
+msgid "Periodically moves a View page display to a new random path, substituting it while the request is processed (the View, blocks and menus are never saved, the route is never rewritten). Makes bots that hit a static URL less effective."
+msgstr "Периодически меняет путь выбранного View page-дисплея на случайный, подменяя его на уровне обработки запроса (View/блоки/меню не сохраняются никогда, роут не переписывается) — снижает эффективность ботов, бьющих по статическому URL."
+
+msgid "Rotation is enabled, but the View/display was not found for @count of @total targets: @labels"
+msgstr "Ротация включена, но целевой View/display не найден у @count из @total целей: @labels"
+
+msgid "These targets are not rotated until their View/display is set again; see the <a href=\":url\">target list</a>."
+msgstr "Эти цели не ротируются, пока их View/display не заданы заново — см. <a href=\":url\">список целей</a>."
+
+msgid "Rotation configured: 1 enabled target."
+msgid_plural "Rotation configured: @count enabled targets."
+msgstr[0] "Ротация настроена: @count включённая цель."
+msgstr[1] "Ротация настроена: @count включённые цели."
+msgstr[2] "Ротация настроена: @count включённых целей."
+
+msgid "No legacy views_path_rotator.settings config, nothing to migrate."
+msgstr "Старого конфига views_path_rotator.settings нет — переносить нечего."
+
+msgid "The legacy views_path_rotator.settings config was empty (no View/display selected); deleted without creating a target."
+msgstr "Старый конфиг views_path_rotator.settings был пуст (View/display не выбраны) — удалён без создания цели."
+
+msgid "Legacy views_path_rotator.settings config migrated to rotation target \"@id\"."
+msgstr "Старый конфиг views_path_rotator.settings перенесён в цель ротации \"@id\"."
+
+msgid "Add rotation target"
+msgstr "Добавить цель ротации"
+
+msgid "Timed path rotation for View page displays: list of targets."
+msgstr "Ротация пути View page-дисплея по таймеру — список целей."
+
+msgid "Administer Views Path Rotator"
+msgstr "Администрирование Views Path Rotator"
+
+msgid "Configure path rotation (which View/display to rotate, interval) and run rotation manually."
+msgstr "Настройка ротации пути (какой View/display ротировать, интервал) и запуск ротации вручную."
+
+msgid "Current path of a specific rotation target (as of the last rotation)."
+msgstr "Текущий (актуальный после последней ротации) путь конкретной цели ротации."
+
+msgid "Target path (by id)"
+msgstr "Путь цели (по id)"
+
+msgid "For example [views_path_rotator:target_path:search]: path relative to the site root. TARGET_ID is shown in the target list on the settings page."
+msgstr "Например [views_path_rotator:target_path:search] — путь относительно корня сайта, TARGET_ID виден в списке целей на странице настроек."
+
+msgid "Target URL (by id)"
+msgstr "URL цели (по id)"
+
+msgid "For example [views_path_rotator:target_url:search]: absolute link, such as https://site/search-3f9a2b7c."
+msgstr "Например [views_path_rotator:target_url:search] — абсолютная ссылка, например https://site/search-3f9a2b7c."
+
+msgid "Views Path Rotator rotation target"
+msgstr "Цель ротации Views Path Rotator"
+
+msgid "Target machine name"
+msgstr "Machine name цели"
+
+msgid "Automatic rotation enabled"
+msgstr "Автоматическая ротация включена"
+
+msgid "View machine name"
+msgstr "Машинное имя View"
+
+msgid "Page display machine name"
+msgstr "Машинное имя page-дисплея"
+
+msgid "Fixed path prefix (no slashes, may be empty)"
+msgstr "Постоянный префикс пути (без слэшей, может быть пустым)"
+
+msgid "Length of the random token in the path"
+msgstr "Длина случайного токена в пути"
+
+msgid "Number of rotation interval units"
+msgstr "Число единиц интервала ротации"
+
+msgid "Interval unit (minutes|hours|days)"
+msgstr "Единица интервала (minutes|hours|days)"
+
+msgid "Also check on regular site requests (not only on hook_cron)"
+msgstr "Также запускать проверку на обычных обращениях к сайту (не только на hook_cron)"
+
+msgid "View : display"
+msgstr "View : дисплей"
+
+msgid "Automatic rotation"
+msgstr "Автоматическая ротация"
+
+msgid "Current path"
+msgstr "Текущий путь"
+
+msgid "Next rotation"
+msgstr "Следующая ротация"
+
+msgctxt "Rotation status"
+msgid "Enabled"
+msgstr "Включена"
+
+msgctxt "Rotation status"
+msgid "Disabled"
+msgstr "Выключена"
+
+msgid "— not rotated yet —"
+msgstr "— ещё не ротировали —"
+
+msgid "on the next cron run or visit"
+msgstr "при следующем cron/визите"
+
+msgid "at the nearest cron run or visit"
+msgstr "при ближайшем cron/визите"
+
+msgid "Rotate now"
+msgstr "Ротировать сейчас"
+
+msgid "No rotation targets yet. Click \"Add rotation target\" to choose a View and page display."
+msgstr "Целей ротации ещё нет. Нажмите «Добавить цель ротации», чтобы выбрать View и page-дисплей."
+
+msgid "\"@label\": path rotated: @old → @new."
+msgstr "«@label»: путь ротирован: @old → @new."
+
+msgid "\"@label\": rotation skipped: @reason."
+msgstr "«@label»: ротация пропущена: @reason."
+
+msgid "\"@label\": rotation failed: @reason."
+msgstr "«@label»: ротация не удалась: @reason."
+
+msgid "rotation target"
+msgstr "цель ротации"
+
+msgid "rotation targets"
+msgstr "цели ротации"
+
+msgid "@count rotation target"
+msgid_plural "@count rotation targets"
+msgstr[0] "@count цель ротации"
+msgstr[1] "@count цели ротации"
+msgstr[2] "@count целей ротации"
+
+msgid "For your own convenience, e.g. \"Dictionary search\". Not shown anywhere on the site."
+msgstr "Для собственного удобства — например \"Поиск по словарю\". На сайте нигде не отображается."
+
+msgid "Used as a namespace in State and in the tokens <code>[views_path_rotator:target_path:ID]</code>/<code>[views_path_rotator:target_url:ID]</code>. Cannot be changed after creation."
+msgstr "Используется как неймспейс в State и в токенах <code>[views_path_rotator:target_path:ID]</code>/<code>[views_path_rotator:target_url:ID]</code> — сменить после создания нельзя."
+
+msgid "While disabled, cron and regular visits leave this target alone. The \"Rotate now\" operation in the target list works regardless of this checkbox, so you can test the target before enabling automation."
+msgstr "Пока выключено, cron/обычные визиты эту цель не трогают. Кнопка «Ротировать сейчас» в списке целей работает независимо от этой галочки — ей можно пользоваться, чтобы протестировать цель до включения автоматики."
+
+msgid "View and page display to rotate"
+msgstr "View и page-дисплей для ротации"
+
+msgid "Lists all Views with a page display that has a path."
+msgstr "Список собран из всех Views с page-дисплеем (у которого есть путь)."
+
+msgid "Random path format"
+msgstr "Формат случайного пути"
+
+msgid "Fixed prefix"
+msgstr "Постоянный префикс"
+
+msgid "Optional. For example, \"search\" gives a path like /search-3f9a2b7c1d4e58a0. If empty, the path is just /3f9a2b7c1d4e58a0."
+msgstr "Необязательно. Например \"search\" даст путь вида /search-3f9a2b7c1d4e58a0. Пусто — путь будет просто /3f9a2b7c1d4e58a0."
+
+msgid "Random token length (hex characters)"
+msgstr "Длина случайного токена (символов hex)"
+
+msgid "Rotation interval"
+msgstr "Интервал ротации"
+
+msgid "Rotate every"
+msgstr "Ротировать каждые"
+
+msgid "0 = rotate on every cron run."
+msgstr "0 = ротировать на каждый вызов cron."
+
+msgctxt "Rotation interval unit"
+msgid "Unit"
+msgstr "Единица"
+
+msgctxt "Rotation interval unit"
+msgid "minutes"
+msgstr "минут"
+
+msgctxt "Rotation interval unit"
+msgid "hours"
+msgstr "часов"
+
+msgctxt "Rotation interval unit"
+msgid "days"
+msgstr "дней"
+
+msgid "Also check on regular site requests"
+msgstr "Также проверять на обычных обращениях к сайту"
+
+msgid "Select a View and display."
+msgstr "Выберите View и дисплей."
+
+msgid "This View/display is already rotated by target \"@label\"."
+msgstr "Этот View/дисплей уже ротируется целью «@label»."
+
+msgid "This display has an argument in its path (@path). Rotation replaces the whole path with a flat random token, so the argument would be lost and the page would stop working. Choose a display without path arguments."
+msgstr "У этого дисплея в пути есть аргумент (@path). Ротация заменяет путь целиком на плоский случайный токен, так что аргумент пропал бы, а страница перестала бы работать. Выберите дисплей без аргументов в пути."
+
+msgid "The nominal path of this display (as saved in the View config) is currently the site front page (/@front). The module substitutes the route path, while page.front points to the original path, so enabling rotation would leave the site without a working front page. Change the front page at /admin/config/system/site-information first, or choose another View/display."
+msgstr "Номинальный (сохранённый в конфиге View) путь этого дисплея сейчас совпадает с главной страницей сайта (/@front). Модуль подменяет путь роута, а page.front ссылается на исходный путь — включение ротации оставит сайт без рабочей главной страницы. Сначала смените главную страницу на /admin/config/system/site-information, либо выберите другой View/display."
+
+msgid "The interval must be between 0 and 100000."
+msgstr "Значение интервала должно быть от 0 до 100000."
+
+msgid "The token length must be between 4 and 64."
+msgstr "Длина токена должна быть от 4 до 64."
+
+msgid "The prefix may contain only Latin letters, digits, \"-\" and \"_\"."
+msgstr "Префикс может содержать только латинские буквы, цифры, \"-\" и \"_\"."
+
+msgid "Rotation target %label created."
+msgstr "Цель ротации «%label» создана."
+
+msgid "Rotation target %label saved."
+msgstr "Цель ротации «%label» сохранена."
+
+msgid "Views Path Rotator: current rotating page"
+msgstr "Views Path Rotator: текущая ротируемая страница"
+
+msgid "Rotation target"
+msgstr "Цель ротации"
+
+msgid "Targets are configured on the <a href=\":url\">Views Path Rotator page</a>."
+msgstr "Список целей настраивается на <a href=\":url\">странице Views Path Rotator</a>."
+
+msgid "Views Path Rotator is not configured (no rotation target selected)"
+msgstr "Views Path Rotator не настроен (не выбрана цель ротации)"
+
+msgid "Not the current rotating page (@label)"
+msgstr "Не текущая ротируемая страница (@label)"
+
+msgid "Current rotating page (@label)"
+msgstr "Текущая ротируемая страница (@label)"
+
+msgid "Rotation of target @target failed with an exception. @class: @message"
+msgstr "Ротация цели @target упала с исключением. @class: @message"
+
+msgid "View @id not found (target @target)."
+msgstr "View @id не найден (цель @target)."
+
+msgid "Display @view:@display not found or has no path (target @target)."
+msgstr "Дисплей @view:@display не найден или не имеет пути (цель @target)."
+
+msgid "Display @view:@display has an argument in its path (@path); rotation would replace the whole path and break the argument (target @target)."
+msgstr "Дисплей @view:@display имеет аргумент в пути (@path) — ротация заменила бы путь целиком и сломала бы аргумент (цель @target)."
+
+msgid "Rotation of target @target cancelled: the nominal display path (@path) is the site front page (system.site:page.front). This module substitutes the route path while page.front points to the original one, so rotating this display would leave the site without a working front page."
+msgstr "Ротация цели @target отменена: номинальный путь дисплея (@path) совпадает с главной страницей сайта (system.site:page.front) — этот модуль подменяет путь роута, а page.front ссылается на исходный, поэтому включение ротации для этого дисплея оставило бы сайт без рабочей главной страницы."
+
+msgid "Could not find a free path within the allowed number of attempts (target @target, view @view:@display)."
+msgstr "Не удалось подобрать свободный путь за отведённое число попыток (цель @target, view @view:@display)."
+
+msgid "Path rotated: @old → @new (target @target, view @view:@display, trigger: @trigger)."
+msgstr "Путь ротирован: @old → @new (цель @target, view @view:@display, триггер: @trigger)."
+
+msgid "The route name of this display, <code>@route</code>, never changes on rotation. Link menu items to <code>route:@route</code> instead of a literal path: a literal path returns 404 after the first rotation."
+msgstr "Имя роута этого дисплея — <code>@route</code> — не меняется при ротации. В пунктах меню указывайте ссылку <code>route:@route</code> вместо литерального пути: литеральный путь отдаёт 404 после первой ротации."
+
+msgid "16 characters (64 bits) is a sensible default. Fewer than 8 (32 bits) is not recommended: a short token can be brute-forced."
+msgstr "16 символов (64 бита) — разумный дефолт. Меньше 8 символов (32 бита) не рекомендуется: короткий токен подбирается перебором."
+
+msgid "Rotation only happens when Drupal cron actually runs. If cron runs rarely on this site, enable the option below."
+msgstr "Ротация происходит, только когда реально запускается Drupal cron. Если cron на сайте запускается редко, включите опцию ниже."
+
+msgid "The check runs after the response has been sent, so the visitor is not delayed. Useful when cron runs less often than the rotation interval."
+msgstr "Проверка запускается после отправки ответа посетителю, страница для него не задерживается. Полезно, когда cron запускается реже нужного интервала ротации."
+
+msgid "@text <a href=\":url\">More…</a>"
+msgstr "@text <a href=\":url\">Подробнее…</a>"
+
+msgid "Periodically moves a View page display to a new random path, so bots that hit a known URL stop finding the page. This is protection by obscurity, not a replacement for rate limiting or CAPTCHA."
+msgstr "Периодически меняет путь у выбранного page-дисплея View на случайный, так что боты, бьющие по известному URL, перестают находить страницу. Это защита через обфускацию адреса, а не замена rate limiting или CAPTCHA."
+
+msgid "Rotation targets are managed on the <a href=\":targets\">Views Path Rotator page</a>. Setup, linking to the rotating page and the schedule are covered in the <a href=\":topic\">help topics</a>."
+msgstr "Цели ротации настраиваются на <a href=\":targets\">странице Views Path Rotator</a>. Как настроить цель, как ссылаться на ротируемую страницу и как устроено расписание — в <a href=\":topic\">справочных статьях</a>."
+
+msgid "Rotating a View page path"
+msgstr "Ротация пути страницы View"
+
+msgid "What the module does"
+msgstr "Что делает модуль"
+
+msgid "Periodically moves a View page display to a new random path such as <em>/search-3f9a2b7c1d4e58a0</em>. The old address simply stops existing (a regular 404), so bots that hit a known, hard-coded URL become less effective. This is protection by obscurity, not a replacement for rate limiting or CAPTCHA; add those separately."
+msgstr "Периодически меняет путь у выбранного page-дисплея View на случайный, вида <em>/search-3f9a2b7c1d4e58a0</em>. Старый адрес просто перестаёт существовать (обычный 404), поэтому боты, которые бьют по заранее известному, захардкоженному URL, теряют эффективность. Это защита через обфускацию адреса, а не замена rate limiting или CAPTCHA: их стоит добавить отдельно."
+
+msgid "You can set up several independent rotation targets (different Views or displays), each with its own interval and path format."
+msgstr "Можно настроить несколько независимых целей ротации (разные View или дисплеи), у каждой свой интервал и формат пути."
+
+msgid "How it works"
+msgstr "Как это работает"
+
+msgid "The module never saves the View itself, nor blocks, menu links or any other site entity. The path is substituted while the incoming request is processed and when links are generated; only State changes. The route of the View display is never rewritten, and the path saved in the View config (the <em>nominal</em> path) stays the same forever."
+msgstr "Модуль никогда не сохраняет ни сам View, ни блоки, ни пункты меню, ни какие-либо другие сущности сайта. Путь подменяется при обработке входящего запроса и при генерации ссылок, меняется только State. Роут View-дисплея не переписывается вообще, а сохранённый в конфиге View путь (<em>номинальный</em>) остаётся постоянным навсегда."
+
+msgid "Setting up a rotation target"
+msgstr "Как настроить цель ротации"
+
+msgid "In the <em>Manage</em> administrative menu, navigate to <em>Configuration</em> &gt; <em>Search and metadata</em> &gt; <em>@targets_link</em>."
+msgstr "В административном меню <em>Управление</em> перейдите в <em>Конфигурация</em> &gt; <em>Поиск и метаданные</em> &gt; <em>@targets_link</em>."
+
+msgid "Click <em>Add rotation target</em>, choose the View and page display, the path format and the interval, and save."
+msgstr "Нажмите <em>Добавить цель ротации</em>, выберите View и page-дисплей, формат пути и интервал, сохраните."
+
+msgid "Use the <em>Rotate now</em> operation in the target list to test the target. It works even while automatic rotation is off."
+msgstr "Проверьте цель операцией <em>Ротировать сейчас</em> в списке целей — она работает, даже пока автоматическая ротация выключена."
+
+msgid "Switch menu links and other references to the page to its route name, as described in the related topic."
+msgstr "Переключите пункты меню и другие ссылки на страницу на имя её роута, как описано в связанной статье."
+
+msgid "Edit the target and check <em>Automatic rotation enabled</em>. Until then, cron and regular visits leave the target alone."
+msgstr "Отредактируйте цель и отметьте <em>Автоматическая ротация включена</em>. До этого cron и обычные визиты эту цель не трогают."
+
+msgid "Choosing the token length"
+msgstr "Какую длину токена выбрать"
+
+msgid "The whole point of rotation is that the new path cannot be guessed by brute force. 16 hex characters (64 bits) is a sensible default; fewer than 8 characters (32 bits, about 4 billion combinations) is not recommended, since a short token can be enumerated in reasonable time."
+msgstr "Весь смысл ротации в том, чтобы новый путь нельзя было подобрать перебором. 16 hex-символов (64 бита) — разумный дефолт; меньше 8 символов (32 бита, около 4 млрд комбинаций) не рекомендуется: короткий токен перебирается за разумное время."
+
+msgid "Linking to a rotating page"
+msgstr "Как сослаться на ротируемую страницу"
+
+msgid "The path of a rotating page changes, but its route name (<em>view.VIEW_ID.DISPLAY_ID</em>) does not. Anything that should lead to the page must refer to it by route name, not by a literal path. The exact route name is shown on the target edit form after you choose the View and display."
+msgstr "Путь ротируемой страницы меняется, а имя её роута (<em>view.VIEW_ID.DISPLAY_ID</em>) — нет. Всё, что должно вести на эту страницу, должно ссылаться на неё по имени роута, а не по литеральному пути. Точное имя роута показывается на форме цели после выбора View и дисплея."
+
+msgid "Menu links"
+msgstr "Пункты меню"
+
+msgid "In the <em>Link</em> field, enter <code>route:view.VIEW_ID.DISPLAY_ID</code> instead of a literal path. It resolves to the current path on every render. A literal path returns 404 after the first rotation."
+msgstr "В поле <em>Ссылка</em> укажите <code>route:view.VIEW_ID.DISPLAY_ID</code> вместо литерального пути. Такая ссылка при каждом рендере резолвится в актуальный путь. Литеральный путь отдаёт 404 после первой ротации."
+
+msgid "Block and asset visibility"
+msgstr "Видимость блоков и ассетов"
+
+msgid "The standard <em>Pages</em> (Request Path) condition with the nominal path keeps working after rotation: it compares against the internal current path, not the raw URL. Alternatively, use the <em>Views Path Rotator: current rotating page</em> condition, which names the target by its machine name."
+msgstr "Штатное условие <em>Страницы</em> (Request Path) с номинальным путём продолжает работать и после ротации: оно сверяется с внутренним текущим путём, а не с сырым URL. Как альтернатива есть условие <em>Views Path Rotator: текущая ротируемая страница</em>, которое называет цель по machine name."
+
+msgid "Free text"
+msgstr "Свободный текст"
+
+msgid "Where you need the address itself as text (custom block body, content), use the tokens <code>[views_path_rotator:target_path:TARGET_ID]</code> (path) and <code>[views_path_rotator:target_url:TARGET_ID]</code> (absolute URL). TARGET_ID is the machine name of the target from the target list."
+msgstr "Там, где нужен сам адрес как строка (тело кастомного блока, материал), используйте токены <code>[views_path_rotator:target_path:TARGET_ID]</code> (путь) и <code>[views_path_rotator:target_url:TARGET_ID]</code> (абсолютная ссылка). TARGET_ID — machine name цели из списка целей."
+
+msgid "Third-party code"
+msgstr "Сторонний код"
+
+msgid "Safe: anything that asks Drupal by route, such as links built with <em>Url::fromRoute()</em> or <em>route:</em> URIs, the <em>path.current</em> service and the current route match. Facets links keep working too."
+msgstr "Безопасно: всё, что спрашивает Drupal через роут — ссылки через <em>Url::fromRoute()</em> или URI <em>route:</em>, сервис <em>path.current</em>, текущий route match. Ссылки Facets тоже продолжают работать."
+
+msgid "Breaks on the next rotation: anything that matches the raw address string, such as client-side JavaScript comparing <em>window.location.pathname</em>, direct reads of the request path, <em>internal:/path</em> URIs and literal paths in config or external services."
+msgstr "Сломается на следующей ротации: всё, что сверяет сырую строку адреса — клиентский JavaScript со сравнением <em>window.location.pathname</em>, прямое чтение пути из запроса, URI <em>internal:/path</em> и литеральные пути в конфиге или внешних сервисах."
+
+msgid "Rotation schedule: cron and site requests"
+msgstr "Расписание ротации: cron и обращения к сайту"
+
+msgid "Each target has its own interval. Whether a rotation is due is checked by the Interval Trigger module on two channels: on cron runs and, optionally, on regular requests to the site."
+msgstr "У каждой цели свой интервал. Подошёл ли срок ротации, проверяет модуль Interval Trigger по двум каналам: при запуске cron и, по желанию, на обычных обращениях к сайту."
+
+msgid "On cron runs"
+msgstr "При запуске cron"
+
+msgid "Drupal cron is not a built-in scheduler: it only runs when something triggers it (a visit after the automated cron threshold, an external crontab, <em>drush cron</em>). If cron runs rarely on the site, say once a week, the configured interval is not honoured in practice, and an old path that bots may already know stays alive until the next cron run."
+msgstr "Drupal cron — не встроенный планировщик: он запускается, только когда его что-то дёргает (визит после порога automated cron, внешний crontab, <em>drush cron</em>). Если cron на сайте запускается редко, скажем раз в неделю, настроенный интервал фактически не соблюдается, а старый, возможно уже известный ботам путь живёт до следующего запуска cron."
+
+msgid "On regular site requests"
+msgstr "На обычных обращениях к сайту"
+
+msgid "The <em>Also check on regular site requests</em> option on a target adds a second channel: the check runs after the response has been sent to the visitor, so the page is not delayed for them. Real traffic is almost always more frequent than a rare cron."
+msgstr "Опция <em>Также проверять на обычных обращениях к сайту</em> в настройках цели добавляет второй канал: проверка запускается после отправки ответа посетителю, так что страница для него не задерживается. Реальный трафик почти всегда чаще редкого cron."
+
+msgid "Requests served entirely from the Drupal page cache (cached pages for anonymous visitors) may skip this check. Any uncached request (logged-in visits, forms, AJAX, admin pages) still triggers it, which is usually enough."
+msgstr "Запросы, которые целиком отдаются из Drupal Page Cache (кэшированные страницы для анонимов), эту проверку могут пропускать. Любой некэшируемый запрос (визит авторизованного пользователя, формы, AJAX, админка) её запускает, и этого обычно достаточно."
+
+msgid "How often the request channel actually checks tasks is limited by the Interval Trigger settings; see the related topic."
+msgstr "Как часто канал обращений реально проверяет задачи, ограничивает настройка Interval Trigger — см. связанную статью."
+
+msgid "only manually"
+msgstr "только вручную"
+
+
+msgid "Views Path Rotator — external caches"
+msgstr "Views Path Rotator — внешние кэши"
+
+msgid "Purge is installed: make sure its queue processes cache-tag invalidations, so proxies drop old rotated paths."
+msgstr "Установлен Purge: убедитесь, что его очередь обрабатывает инвалидации по кэш-тегам, чтобы прокси сбрасывали старые ротированные пути."
+
+msgid "Rotation only clears Drupal's own caches."
+msgstr "Ротация сбрасывает только собственные кэши Drupal."
+
+msgid "If a reverse proxy or CDN (Varnish, nginx cache, Cloudflare…) caches pages in front of this site, it keeps serving an old rotated path until its own TTL expires. Purge it on rotation (for example with the Purge module) or keep its TTL for these pages short."
+msgstr "Если перед сайтом стоит обратный прокси или CDN (Varnish, кэш nginx, Cloudflare…), он продолжит отдавать старый ротированный путь, пока не истечёт его TTL. Сбрасывайте его при ротации (например, модулем Purge) или держите для этих страниц короткий TTL."

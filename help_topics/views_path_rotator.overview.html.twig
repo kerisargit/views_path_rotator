@@ -1,0 +1,24 @@
+---
+label: 'Rotating a View page path'
+top_level: true
+related:
+  - views_path_rotator.linking
+  - views_path_rotator.schedule
+---
+{% set targets_link_text %}{% trans %}Views Path Rotator{% endtrans %}{% endset %}
+{% set targets_link = render_var(help_route_link(targets_link_text, 'entity.views_path_rotator_target.collection')) %}
+<h2>{% trans %}What the module does{% endtrans %}</h2>
+<p>{% trans %}Periodically moves a View page display to a new random path such as <em>/search-3f9a2b7c1d4e58a0</em>. The old address simply stops existing (a regular 404), so bots that hit a known, hard-coded URL become less effective. This is protection by obscurity, not a replacement for rate limiting or CAPTCHA; add those separately.{% endtrans %}</p>
+<p>{% trans %}You can set up several independent rotation targets (different Views or displays), each with its own interval and path format.{% endtrans %}</p>
+<h2>{% trans %}How it works{% endtrans %}</h2>
+<p>{% trans %}The module never saves the View itself, nor blocks, menu links or any other site entity. The path is substituted while the incoming request is processed and when links are generated; only State changes. The route of the View display is never rewritten, and the path saved in the View config (the <em>nominal</em> path) stays the same forever.{% endtrans %}</p>
+<h2>{% trans %}Setting up a rotation target{% endtrans %}</h2>
+<ol>
+  <li>{% trans %}In the <em>Manage</em> administrative menu, navigate to <em>Configuration</em> &gt; <em>Search and metadata</em> &gt; <em>{{ targets_link }}</em>.{% endtrans %}</li>
+  <li>{% trans %}Click <em>Add rotation target</em>, choose the View and page display, the path format and the interval, and save.{% endtrans %}</li>
+  <li>{% trans %}Use the <em>Rotate now</em> operation in the target list to test the target. It works even while automatic rotation is off.{% endtrans %}</li>
+  <li>{% trans %}Switch menu links and other references to the page to its route name, as described in the related topic.{% endtrans %}</li>
+  <li>{% trans %}Edit the target and check <em>Automatic rotation enabled</em>. Until then, cron and regular visits leave the target alone.{% endtrans %}</li>
+</ol>
+<h2>{% trans %}Choosing the token length{% endtrans %}</h2>
+<p>{% trans %}The whole point of rotation is that the new path cannot be guessed by brute force. 16 hex characters (64 bits) is a sensible default; fewer than 8 characters (32 bits, about 4 billion combinations) is not recommended, since a short token can be enumerated in reasonable time.{% endtrans %}</p>

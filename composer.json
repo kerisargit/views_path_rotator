@@ -1,0 +1,9 @@
+{
+    "name": "kerisargit/views_path_rotator",
+    "type": "drupal-custom-module",
+    "description": "Periodically moves a View page display to a random path to frustrate bots hitting a known URL.",
+    "require": {
+        "php": ">=8.1",
+        "drupal/core": "^10.3 || ^11"
+    }
+}

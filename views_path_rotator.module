@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Views Path Rotator.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function views_path_rotator_help($route_name, RouteMatchInterface $route_match) {
+  if ($route_name !== 'help.page.views_path_rotator') {
+    return NULL;
+  }
+
+  $output = '<p>' . t('Periodically moves a View page display to a new random path, so bots that hit a known URL stop finding the page. This is protection by obscurity, not a replacement for rate limiting or CAPTCHA.') . '</p>';
+  $output .= '<p>' . t('Rotation targets are managed on the <a href=":targets">Views Path Rotator page</a>. Setup, linking to the rotating page and the schedule are covered in the <a href=":topic">help topics</a>.', [
+    ':targets' => Url::fromRoute('entity.views_path_rotator_target.collection')->toString(),
+    ':topic' => Url::fromRoute('help.help_topic', ['id' => 'views_path_rotator.overview'])->toString(),
+  ]) . '</p>';
+
+  return $output;
+}

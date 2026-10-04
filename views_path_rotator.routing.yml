@@ -1,0 +1,11 @@
+views_path_rotator.target_rotate:
+  path: '/admin/config/search/views-path-rotator/{views_path_rotator_target}/rotate'
+  defaults:
+    _controller: '\Drupal\views_path_rotator\Controller\TargetRotateController::rotate'
+  requirements:
+    _permission: 'administer views path rotator'
+    _csrf_token: 'true'
+  options:
+    parameters:
+      views_path_rotator_target:
+        type: entity:views_path_rotator_target

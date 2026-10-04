@@ -1,0 +1,12 @@
+name: 'Views Path Rotator'
+type: module
+description: 'Periodically moves a View page display to a new random path, substituting it while the request is processed (the View, blocks and menus are never saved, the route is never rewritten). Makes bots that hit a static URL less effective.'
+package: 'Views'
+core_version_requirement: ^10.3 || ^11
+version: 1.0.0
+dependencies:
+  - views:views
+  - interval_trigger:interval_trigger
+configure: entity.views_path_rotator_target.collection
+'interface translation project': views_path_rotator
+'interface translation server pattern': modules/custom/views_path_rotator/translations/%project.%language.po

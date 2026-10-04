@@ -1,0 +1,14 @@
+---
+label: 'Rotation schedule: cron and site requests'
+related:
+  - views_path_rotator.overview
+  - interval_trigger.request_checks
+  - core.cron
+---
+<p>{% trans %}Each target has its own interval. Whether a rotation is due is checked by the Interval Trigger module on two channels: on cron runs and, optionally, on regular requests to the site.{% endtrans %}</p>
+<h2>{% trans %}On cron runs{% endtrans %}</h2>
+<p>{% trans %}Drupal cron is not a built-in scheduler: it only runs when something triggers it (a visit after the automated cron threshold, an external crontab, <em>drush cron</em>). If cron runs rarely on the site, say once a week, the configured interval is not honoured in practice, and an old path that bots may already know stays alive until the next cron run.{% endtrans %}</p>
+<h2>{% trans %}On regular site requests{% endtrans %}</h2>
+<p>{% trans %}The <em>Also check on regular site requests</em> option on a target adds a second channel: the check runs after the response has been sent to the visitor, so the page is not delayed for them. Real traffic is almost always more frequent than a rare cron.{% endtrans %}</p>
+<p>{% trans %}Requests served entirely from the Drupal page cache (cached pages for anonymous visitors) may skip this check. Any uncached request (logged-in visits, forms, AJAX, admin pages) still triggers it, which is usually enough.{% endtrans %}</p>
+<p>{% trans %}How often the request channel actually checks tasks is limited by the Interval Trigger settings; see the related topic.{% endtrans %}</p>
